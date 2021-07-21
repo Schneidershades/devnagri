@@ -8,6 +8,7 @@ use Session;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Level;
 use App\Models\UserPermission;
 
 class UserController extends Controller
@@ -23,11 +24,12 @@ class UserController extends Controller
     {
         return view('pages.users.create')
             ->with('roles', Role::all())
+            ->with('levels', Level::all())
             ->with('permissions', Permission::all());
     }
 
     public function store(UserCreateFormRequest $request)
-    { 
+    {
         $user = User::create($request->validated());
         $user->roles()->sync($request->roles);
         $user->givePermissionTo($request->permissions);
@@ -51,7 +53,8 @@ class UserController extends Controller
 
     public function update(UserUpdateFormRequest $request, $id)
     {
-        $user = User::update($request->validated());
+        $user = User::findOrFail($id);
+        $user->update($request->validated());
         $user->roles()->sync($request->roles);
         $user->permissions()->attach($request->permissions);
         Session::flash('success', 'Permission was sucessfully added');

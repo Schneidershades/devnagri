@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LevelCreateFormRequest;
 use App\Http\Requests\LevelUpdateFormRequest;
 use App\Models\Level;
+use Session;
 
 class LevelController extends Controller
 {
@@ -19,13 +20,14 @@ class LevelController extends Controller
         return view('pages.levels.create');
     }
 
-    public function store(Request $request)
+    public function store(LevelCreateFormRequest $request)
     {
         $role =  new Level;
         $role->name = $request->name;
+        $role->rank = $request->rank;
         $role->save();
         Session::flash('success', 'role was sucessfully created');
-        return redirect()->route('levels.index', $role->id);
+        return redirect()->route('levels.index');
     }
 
     public function show($id)
@@ -40,13 +42,14 @@ class LevelController extends Controller
         return view('pages.levels.edit')->with('role', $role);
     }
 
-    public function update(Request $request, $id)
+    public function update(LevelUpdateFormRequest $request, $id)
     {
         $role =  Level::findOrFail($id);
         $role->name = $request->name;
+        $role->rank = $request->rank;
         $role->save();
         Session::flash('success', 'role was sucessfully updated');
-        return redirect()->route('levels.show', $role->id);
+        return redirect()->route('levels.index');
     }
 
     public function destroy($id)

@@ -16,7 +16,8 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Action</th>
+                  <th>Permissions</th>
+                  <th>Permissions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,6 +25,7 @@
                 <tr>
                   <td>{{$role->id}}</td>
                   <td>{{$role->name}}</td>
+                  <td>{{$role->permissions->count()}}</td>
                   <td>Edit||Delete||View</td>
                 </tr>
                 @endforeach
@@ -32,6 +34,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Permissions</th>
                   <th>Action</th>
                 </tr>
                 </tfoot>

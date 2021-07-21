@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RoleCreateFormRequest;
 use App\Http\Requests\RoleUpdateFormRequest;
 use App\Models\Role;
+use App\Models\Permission;
+use Session;
 
 class RoleController extends Controller
 {
@@ -16,16 +18,16 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('pages.roles.create');
+        return view('pages.roles.create')
+            ->with('permissions', Permission::all());
     }
 
-    public function store(Request $request)
+    public function store(RoleCreateFormRequest $request)
     {
-        $role =  new Role;
-        $role->name = $request->name;
-        $role->save();
+        $role = Role::create($request->validated());
+        $role->permissions()->sync($request->permissions);
         Session::flash('success', 'role was sucessfully created');
-        return redirect()->route('roles.index', $role->id);
+        return redirect()->route('roles.index');
     }
 
     public function show($id)
@@ -40,13 +42,14 @@ class RoleController extends Controller
         return view('pages.roles.edit')->with('role', $role);
     }
 
-    public function update(Request $request, $id)
+    public function update(RoleUpdateFormRequest $request, $id)
     {
         $role =  Role::findOrFail($id);
         $role->name = $request->name;
         $role->save();
+        $role->permissions()->sync($request->permissions);
         Session::flash('success', 'role was sucessfully updated');
-        return redirect()->route('roles.show', $role->id);
+        return redirect()->route('roles.index');
     }
 
     public function destroy($id)

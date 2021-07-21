@@ -28,7 +28,7 @@
                   <td>{{$user->identifier}}</td>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
-                  <td>Role</td>
+                  <td>{{$user->roles->first() ? $user->roles->first()  : 'N/A' }}</td>
                   <td>Level</td>
                   <td>
                     <a class="btn-xs btn-primary">Edit</a>
