@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'User Rank')
+
 @section('content')
   <section class="content">
     <div class="container-fluid">
@@ -7,7 +9,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">@yield('title')</h3>
+              <a href="{{route('levels.create')}}" class="btn-lg btn-success">Create @yield('title')</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -26,7 +28,11 @@
                   <td>{{$level->id}}</td>
                   <td>{{$level->name}}</td>
                   <td>{{$level->rank}}</td>
-                  <td>Edit||Delete||View</td>
+                  <td>
+                    <a class="btn-xs btn-primary">Edit</a>
+                    <a class="btn-xs btn-warning">View</a>
+                    <a class="btn-xs btn-danger">Delete</a>
+                  </td>
                 </tr>
                 @endforeach
                 </tbody>

@@ -7,7 +7,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">@yield('title')</h3>
+              <a href="{{route('users.create')}}" class="btn-lg btn-success">Create @yield('title')</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -30,7 +30,11 @@
                   <td>{{$user->email}}</td>
                   <td>Role</td>
                   <td>Level</td>
-                  <td>Edit||Delete||View</td>
+                  <td>
+                    <a class="btn-xs btn-primary">Edit</a>
+                    <a class="btn-xs btn-warning">View</a>
+                    <a class="btn-xs btn-danger">Delete</a>
+                  </td>
                 </tr>
                 @endforeach
                 </tbody>

@@ -7,7 +7,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">@yield('title')</h3>
+              <a href="{{route('roles.create')}}" class="btn-lg btn-success">Create @yield('title')</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
