@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\LevelCreateFormRequest;
 use App\Http\Requests\LevelUpdateFormRequest;

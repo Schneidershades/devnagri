@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 
 
-class UserController extends BaseController
+class UserController extends Controller
 {
     public function __construct()
     {

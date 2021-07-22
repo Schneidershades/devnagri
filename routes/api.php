@@ -15,7 +15,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
+Route::namespace('App\\Http\\Controllers\\Api\v1')->group(function () {
     Route::get('profile', 'ProfileController@profile');
     Route::put('profile', 'ProfileController@updateProfile');
     Route::post('change-password', 'ProfileController@changePassword');
