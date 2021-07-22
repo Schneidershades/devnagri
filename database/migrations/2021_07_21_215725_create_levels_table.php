@@ -17,6 +17,8 @@ class CreateLevelsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('rank');
+            $table->string('short')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

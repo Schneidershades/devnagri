@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Permission;
+use App\Models\User;
 
 class Role extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'name', 'description'
+    ];
+
+    protected $table = 'roles';
 
     public function permissions()
     {
