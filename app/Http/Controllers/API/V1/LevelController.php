@@ -11,52 +11,31 @@ class LevelController extends Controller
 {
     public function index()
     {
-        $levels = Level::all();
-        return view('pages.levels.index')->with('levels', $levels);
-    }
-
-    public function create()
-    {
-        return view('pages.levels.create');
+        return $this->showOne(Level::all());
     }
 
     public function store(LevelCreateFormRequest $request)
     {
-        $role =  new Level;
-        $role->name = $request->name;
-        $role->rank = $request->rank;
-        $role->save();
-        Session::flash('success', 'role was sucessfully created');
-        return redirect()->route('levels.index');
+        $level =  new Level;
+        $level = Role::create($request->validated());
+        return $this->showOne($role);
     }
 
     public function show($id)
     {
-        $role =  Level::findOrFail($id);
-        return view('pages.levels.show')->with('role', $role);
-    }
-
-    public function edit($id)
-    {
-        $role =  Level::findOrFail($id);
-        return view('pages.levels.edit')->with('role', $role);
+        return $this->showOne(Level::findOrFail($id));
     }
 
     public function update(LevelUpdateFormRequest $request, $id)
     {
         $role =  Level::findOrFail($id);
-        $role->name = $request->name;
-        $role->rank = $request->rank;
-        $role->save();
-        Session::flash('success', 'role was sucessfully updated');
-        return redirect()->route('levels.index');
+        return $this->showOne(Role::update($request->validated()));
     }
 
     public function destroy($id)
     {
         $role =  role::findOrFail($id);
         $role->delete();
-        Session::flash('success', 'role was sucessfully deleted');
-        return redirect()->route('levels.index');
+        return $this->showMessage('deleted');
     }
 }
