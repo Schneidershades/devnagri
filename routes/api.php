@@ -21,7 +21,9 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
     Route::post('change-password', 'ProfileController@changePassword');
 
     Route::apiResources([
-        'user' => 'UserController',
-        'tag' => 'TagController',
+        'users' => 'UserController',
+        'levels' => 'UserController',
+        'roles' => 'UserController',
+        'permissions' => 'UserController',
     ]);
 });
