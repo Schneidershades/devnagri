@@ -12,34 +12,19 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
-        return view('pages.roles.index')->with('roles', $roles);
-    }
-
-    public function create()
-    {
-        return view('pages.roles.create')
-            ->with('permissions', Permission::all());
+        return $this->showAll(Role::all());
     }
 
     public function store(RoleCreateFormRequest $request)
     {
         $role = Role::create($request->validated());
         $role->permissions()->sync($request->permissions);
-        Session::flash('success', 'role was sucessfully created');
-        return redirect()->route('roles.index');
+        return $this->showOne($role);
     }
 
     public function show($id)
     {
-        $role =  Role::findOrFail($id);
-        return view('pages.roles.show')->with('role', $role);
-    }
-
-    public function edit($id)
-    {
-        $role =  Role::findOrFail($id);
-        return view('pages.roles.edit')->with('role', $role);
+        return $this->showOne(Role::findOrFail($id));
     }
 
     public function update(RoleUpdateFormRequest $request, $id)
@@ -48,15 +33,13 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->save();
         $role->permissions()->sync($request->permissions);
-        Session::flash('success', 'role was sucessfully updated');
-        return redirect()->route('roles.index');
+        return $this->showOne($role);
     }
 
     public function destroy($id)
     {
         $role =  role::findOrFail($id);
         $role->delete();
-        Session::flash('success', 'role was sucessfully deleted');
-        return redirect()->route('roles.index');
+        return $this->showMessage('deleted');
     }
 }
